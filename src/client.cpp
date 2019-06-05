@@ -9,7 +9,7 @@
 
 Client::Client() : mQTcpSocket( new QTcpSocket(this) )
 {
-    mQTcpSocket->connectToHost( QHostAddress::LocalHost, 8080);
+    mQTcpSocket->connectToHost( QHostAddress::LocalHost, 8081);
 }
 
 Client::~Client(){
@@ -20,7 +20,7 @@ void Client::sendCmd( CMDs::CMD_t& data ){
 
     QByteArray buffer;
     QDataStream out(&buffer, QIODevice::WriteOnly);
-    out.setVersion(QDataStream::Qt_5_11);
+    out.setVersion(QDataStream::Qt_5_9);
 
     out << data;
 

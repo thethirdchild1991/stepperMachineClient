@@ -2,6 +2,7 @@
 #include "ui_mainwindow.h"
 #include "cmdhelper.h"
 #include "confighelper.h"
+#include "cmdhelper.h"
 
 #include <QRadioButton>
 #include <QVBoxLayout>
@@ -30,10 +31,39 @@ MainWindow::MainWindow(QWidget *parent) :
     }
     ui->paramGroupBox->setLayout( vLayout );
 
+    connect( ui->pushButton, &QPushButton::clicked, this, &MainWindow::onSendCmdClicked );
+
+    mClient = std::make_unique<Client>();
 
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+void MainWindow::onSendCmdClicked(){
+
+    CMDs::CMDs_NAMES cmdType;
+
+    for(auto child : ui->cmdGroupBox->children().mid(1) ){
+        auto radioButton = reinterpret_cast<QRadioButton*>(child);
+
+        if(radioButton->isChecked()){
+            auto cmdName  = radioButton->text();
+            cmdType = CMDs::cmdMap().value(cmdName);
+        }
+    }
+
+    CMDs::CMD_t tmp = {
+                    cmdType,
+                    {
+                        CONFIGS::configsNames::mmInRotation,
+                        10
+                    }
+               };
+
+
+    mClient->sendCmd( tmp );
+
 }

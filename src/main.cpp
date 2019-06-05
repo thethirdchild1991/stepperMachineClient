@@ -1,7 +1,7 @@
 #include "mainwindow.h"
 #include <QApplication>
 
-#include "client.h"
+//#include "client.h"
 
 
 int main(int argc, char *argv[])
@@ -10,17 +10,17 @@ int main(int argc, char *argv[])
     MainWindow w;
     w.show();
 
-    Client client;
+//    Client client;
 
-    CMDs::CMD_t tmp = {
-                    CMDs::CMDs_NAMES::BACK_TO_ZERO,
-                    {
-                        CONFIGS::configsNames::SOnRotate,
-                        10
-                    }
-               };
+//    CMDs::CMD_t tmp = {
+//                    CMDs::CMDs_NAMES::BACK_TO_ZERO,
+//                    {
+//                        CONFIGS::configsNames::mmInRotation,
+//                        10
+//                    }
+//               };
 
-    client.sendCmd( tmp );
+//    client.sendCmd( tmp );
 
     return a.exec();
 }

@@ -3,7 +3,7 @@
 
 #include <QMainWindow>
 
-//#include "client.h"
+#include "client.h"
 
 namespace Ui {
 class MainWindow;
@@ -17,10 +17,13 @@ public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+    public slots:
+    void onSendCmdClicked();
+
 private:
     Ui::MainWindow *ui;
 
-//    Client mClient;
+    std::unique_ptr<Client> mClient = nullptr;
 };
 
 #endif // MAINWINDOW_H
